@@ -14,3 +14,19 @@ document.getElementById('search-input').addEventListener('keypress', function(ev
         searchMovies();
     }
 });
+// Search movies function
+function searchMovies() {
+    const query = document.getElementById('search-input').value.trim();
+    
+    if (!query) {
+        document.getElementById('movie-results').innerHTML = 'Please enter a movie name.';
+        return;
+    }
+    
+    if (query.length < 2) {
+        document.getElementById('movie-results').innerHTML = 'Please enter at least 2 characters.';
+        return;
+    }
+    
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
+    document.getElementById('movie-results').innerHTML = '🎬 Searching for movies...';
