@@ -6,7 +6,7 @@ body {
 }
 
 header {
-  background: gray;
+  background: rgb(32, 31, 31);
   padding: 20px;
   text-align: center;
   color: white;
@@ -46,6 +46,27 @@ header {
 
 #search-button, #toggle-theme {
   transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Theme toggle button (icon) */
+.theme-toggle, #toggle-theme {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.theme-icon {
+  line-height: 1;
 }
 
 #movie-results {

@@ -145,5 +145,31 @@ function showFeedback(message, type = 'info') {
 
 // Toggle theme function
 function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
+    const btn = document.getElementById('toggle-theme');
+    const icon = btn ? btn.querySelector('.theme-icon') : null;
+    const isDark = document.body.classList.toggle('dark-mode');
+    if (btn) btn.setAttribute('aria-pressed', isDark);
+    if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+    try {
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    } catch (e) {
+        // ignore storage errors
+    }
 }
+
+// Initialize theme on load
+(function initTheme() {
+    const btn = document.getElementById('toggle-theme');
+    const icon = btn ? btn.querySelector('.theme-icon') : null;
+    let isDark = false;
+    try {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        isDark = saved ? saved === 'dark' : prefersDark;
+    } catch (e) {
+        isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    if (isDark) document.body.classList.add('dark-mode');
+    if (btn) btn.setAttribute('aria-pressed', isDark);
+    if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+})();
